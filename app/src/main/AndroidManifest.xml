@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Outlab9">
         <activity
+            android:name=".CalendarActivity"
+            android:exported="false" />
+        <activity
             android:name=".DisplayMessage"
             android:exported="false" />
         <activity

@@ -1,48 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:layout_width="match_parent"
+<androidx.drawerlayout.widget.DrawerLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawerLayout">
 
-    <!--<androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:id="@+id/recyclerView">
-    </androidx.recyclerview.widget.RecyclerView>-->
+        android:layout_gravity="start"
+        app:menu="@menu/navigation_menu"/>
 
-    <com.google.android.material.tabs.TabLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tabLayout">
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabStudy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Study Plan" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabAssignment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Assignment" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabExam"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Exam" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabLecture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Lecture" />
-
-    </com.google.android.material.tabs.TabLayout>
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
+    <RelativeLayout android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/tabLayout" />
-</RelativeLayout>
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <com.google.android.material.tabs.TabLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tabLayout">
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabStudy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Study Plan" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabAssignment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Assignment" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabExam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Exam" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabLecture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lecture" />
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tabLayout" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:text="Calendar"
+            android:id="@+id/calendarButton"/>
+    </RelativeLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

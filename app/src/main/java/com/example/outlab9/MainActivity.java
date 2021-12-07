@@ -1,6 +1,9 @@
 package com.example.outlab9;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -9,7 +12,9 @@ import android.content.Intent;
 import android.database.sqlite.*;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -26,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     public static TabItem tabAssignment;
     public static TabItem tabExam;
     public static TabItem tabLecture;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,11 +77,46 @@ public class MainActivity extends AppCompatActivity {
                 //Toast.makeText(MainActivity.this, "Reselected", Toast.LENGTH_SHORT).show();
             }
         });
+
+        Button calendarButton = findViewById(R.id.calendarButton);
+        calendarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
+
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
     @Override
     protected void onRestart() {
         super.onRestart();
         setContentView(R.layout.activity_main);
         System.out.println("Restarted");
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Intent intent;
+        switch(item.getItemId()) {
+            case R.id.buttonMenuCalendar:
+                Toast.makeText(this, "Calendar Selected", Toast.LENGTH_SHORT).show();
+                intent = new Intent(this, CalendarActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.buttonMenuHome:
+                intent = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
