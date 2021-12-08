@@ -94,6 +94,17 @@ public class MainActivity extends AppCompatActivity {
         actionBarDrawerToggle.syncState();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        /*
+        Button buttonDialogFragment = findViewById(R.id.buttonDialogFragment);
+        buttonDialogFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddEntryFragment addEntryFragment = new AddEntryFragment();
+                addEntryFragment.show(getSupportFragmentManager(), "Something");
+            }
+        });
+        */
     }
     @Override
     protected void onRestart() {

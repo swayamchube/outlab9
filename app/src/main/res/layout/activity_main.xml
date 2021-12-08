@@ -59,5 +59,6 @@
             android:layout_alignParentEnd="true"
             android:text="Calendar"
             android:id="@+id/calendarButton"/>
+
     </RelativeLayout>
 </androidx.drawerlayout.widget.DrawerLayout>
