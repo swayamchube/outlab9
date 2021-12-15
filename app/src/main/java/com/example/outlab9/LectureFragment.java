@@ -45,12 +45,12 @@ public class LectureFragment extends Fragment {
     public LectureFragment(Context context) {
         this.mEvents = new ArrayList<String>();
         this.mContext = context;
-        mEvents.add("First Event");
-        mEvents.add("Second Event");
-        mEvents.add("Third Event");
-        mEvents.add("Fourth Event");
-        mEvents.add("Fifth Event");
-        mEvents.add("Sixth Event");
+        DatabaseHelper dbHelper = new DatabaseHelper(context);
+        ArrayList<EventModel> eventList = dbHelper.getWithType("lecture");
+        if (eventList == null) return;
+        for (EventModel event: eventList) {
+            mEvents.add("Date: " + event.getDate() + "\n" + event.getDescription());
+        }
     }
 
     /**
@@ -105,6 +105,16 @@ public class LectureFragment extends Fragment {
         mEvents.add(s);
     }
 
+    public void refreshList() {
+        mEvents.clear();
+        DatabaseHelper dbHelper = new DatabaseHelper(this.mContext);
+        ArrayList<EventModel> eventList = dbHelper.getWithType("lecture");
+        if (eventList == null) return;
+        for (EventModel event: eventList) {
+            mEvents.add("Date: " + event.getDate() + "\n" + event.getDescription());
+        }
+    }
+
     public static class AddLectureItemFragment extends DialogFragment {
         LectureFragment mLF;
         AddLectureItemFragment(LectureFragment lf) {
@@ -117,12 +127,17 @@ public class LectureFragment extends Fragment {
             super.onCreateView(inflater, container, savedInstanceState);
             View view = inflater.inflate(R.layout.fragment_addentry, container, false);
             EditText itemEditText = view.findViewById(R.id.enterText);
+            EditText itemEditDate = view.findViewById(R.id.enterDate);
             Button addToListButton = view.findViewById(R.id.addToListButton);
             addToListButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String item = itemEditText.getText().toString();
-                    mLF.addToList(item);
+                    String description = itemEditText.getText().toString();
+                    String date = itemEditDate.getText().toString();
+                    EventModel em = new EventModel("lecture", description, date);
+                    DatabaseHelper dbHelper = new DatabaseHelper(mLF.getContext());
+                    dbHelper.addEvent(em);
+                    mLF.refreshList();
                 }
             });
             return view;

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -41,11 +42,23 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     class RecyclerViewHolder extends RecyclerView.ViewHolder {
         public TextView messageItemView;
         public RecyclerViewAdapter mAdapter;
+        public Button deleteButton;
 
         public RecyclerViewHolder(View itemView, RecyclerViewAdapter adapter) {
             super(itemView);
             this.messageItemView = itemView.findViewById(R.id.message);
+            this.deleteButton = itemView.findViewById(R.id.deleteButton);
             this.mAdapter = adapter;
+
+            deleteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String message = messageItemView.getText().toString();
+                    mAdapter.mMessageList.remove(message);
+                    DatabaseHelper dbHelper = new DatabaseHelper(itemView.getContext());
+                    dbHelper.deleteEvent(message);
+                }
+            });
         }
     }
 }

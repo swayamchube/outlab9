@@ -88,7 +88,6 @@ public class StudyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // TODO: mRecyclerView is null for some reason. Fix it
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_study, container, false);
         mRecyclerView = view.findViewById(R.id.studyRecyclerView);

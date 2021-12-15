@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.EventLogTags;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -105,5 +106,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         } while(cursor.moveToNext());
 
         return answer;
+    }
+
+    public boolean deleteEvent(String s) {
+        String date = s.substring(6, 16);
+        String description = s.substring(17);
+        Log.d("DeleteEvent", "Date:" + date + " Description:" + description);
+        SQLiteDatabase db = this.getWritableDatabase();
+        String queryString = "DELETE FROM test WHERE date = '" + date + "' AND description = '" + description + "'";
+        db.execSQL(queryString);
+        return true;
     }
 }

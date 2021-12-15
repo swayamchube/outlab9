@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/buttonMenuHome"
-        android:title="Home"/>
+        android:title="Home">
     <item
         android:id="@+id/buttonMenuCalendar"
         android:title="Calendar"/>
